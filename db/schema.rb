@@ -10,7 +10,46 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_23_234324) do
+ActiveRecord::Schema.define(version: 2018_08_24_013717) do
+
+  create_table "albums", force: :cascade do |t|
+    t.string "cover"
+    t.string "name"
+    t.string "description"
+    t.string "slug"
+    t.string "tags"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_albums_on_user_id"
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.string "slug"
+    t.string "tags"
+    t.integer "category_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.index ["category_id"], name: "index_categories_on_category_id"
+    t.index ["user_id"], name: "index_categories_on_user_id"
+  end
+
+  create_table "musics", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.text "content"
+    t.string "slug"
+    t.string "tags"
+    t.integer "album_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["album_id"], name: "index_musics_on_album_id"
+    t.index ["user_id"], name: "index_musics_on_user_id"
+  end
 
   create_table "newsletters", force: :cascade do |t|
     t.string "name"
